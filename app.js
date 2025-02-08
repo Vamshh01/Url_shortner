@@ -3,7 +3,7 @@ import { readFile } from "fs/promises";
 import { createServer } from "http";
 import path from "path";
 
-const PORT = 4000;
+
 const DATA_FILE = path.join("data", "links.json");
 
 // Helper function to serve files
@@ -107,6 +107,8 @@ const server = createServer(async (req, res) => {
 
 });
 
-server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+const PORT = process.env.PORT || 4000; // Use Render's assigned port if available
+
+server.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running at http://0.0.0.0:${PORT}`);
 });
